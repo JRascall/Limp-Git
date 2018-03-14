@@ -11,11 +11,13 @@ func main() {
 	events = make([]string, 0)
 
 	router := gin.Default()
-	router.Use(static.Serve("/", static.LocalFile("/public", true)))
+	router.Use(static.Serve("/", static.LocalFile("./public", true)))
 
 	router.GET("/events", func(c *gin.Context) {
 		c.JSON(200, events)
-		events = append(events[:0], events[1:]...)
+		if len(events) > 0 {
+			events = events[1:]
+		}
 	})
 
 	router.POST("/hook", func(c *gin.Context){
