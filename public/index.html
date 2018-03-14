@@ -5,11 +5,13 @@
     <title>Announce Git Events</title>
 </head>
 <body>
+<img id="limpGif" src="/limp.gif" style="display: none;" />
 <audio id="limp">
     <source src="/intro.ogg" type="audio/ogg"/>
 </audio>
     <script>
         var audio = document.getElementById("limp");
+        var gif = document.getElementById("limpGif");
         audio.volume = 0.5;
         setInterval(function(){
             GET("http://localhost:8005/events", function(data){
@@ -18,10 +20,14 @@
                 switch(data[0])
                 {
                     case "push":
+                        gif.style.display = "block";
                         audio.play();
                         setTimeout(function(){
                             var utterance = new SpeechSynthesisUtterance('GIT REPOSITORY PUSHED');
                             window.speechSynthesis.speak(utterance);
+                            setTimeout(function(){
+                                gif.style.display = "none";
+                            }, 1000);
                         }, 1750);
                         break;
                     default:
