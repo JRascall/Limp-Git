@@ -12,6 +12,7 @@
     <script>
         var audio = document.getElementById("limp");
         var gif = document.getElementById("limpGif");
+        
         audio.volume = 0.5;
         setInterval(function(){
             GET("http://localhost:8005/events", function(data){
