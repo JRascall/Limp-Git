@@ -13,7 +13,7 @@
         audio.volume = 0.5;
         setInterval(function(){
             GET("http://localhost:8005/events", function(data){
-                console.log(data);
+                data = JSON.parse(data);
                 if(data.length <= 0 ) return;
                 switch(data[0])
                 {
