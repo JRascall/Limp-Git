@@ -20,9 +20,13 @@
                     case "push":
                         audio.play();
                         setTimeout(function(){
+                            console.log("SPEAK BITCH");
                             var utterance = new SpeechSynthesisUtterance('REPOSITORY PUSH');
                             window.speechSynthesis.speak(utterance);
                         }, 2200);
+                        break;
+                    default:
+                        console.log(data[0]);
                         break;
                 }
             });
