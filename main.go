@@ -14,7 +14,7 @@ func main() {
 	router.Use(static.Serve("/", static.LocalFile("/public", true)))
 
 	router.GET("/events", func(c *gin.Context) {
-		events = append(events[:1], events[2:]...)
+		events = append(events[:0], events[1:]...)
 		c.JSON(200, events)
 	})
 
