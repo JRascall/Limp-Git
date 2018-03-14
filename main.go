@@ -12,11 +12,12 @@ func main() {
 	events = make([]string, 0)
 
 	router := gin.Default()
-	//router.LoadHTMLGlob(("/templates/*"))
 	router.Use(static.Serve("/", static.LocalFile("/public", true)))
 
 	router.GET("/events", func(c *gin.Context) {
-
+		events = append(events[:1], events[2:]...)
+		fmt.Println(events)
+		c.Status(200)
 	})
 
 	router.POST("/hook", func(c *gin.Context){
