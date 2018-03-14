@@ -14,8 +14,8 @@ func main() {
 	router.Use(static.Serve("/", static.LocalFile("/public", true)))
 
 	router.GET("/events", func(c *gin.Context) {
-		events = append(events[:0], events[1:]...)
 		c.JSON(200, events)
+		events = append(events[:0], events[1:]...)
 	})
 
 	router.POST("/hook", func(c *gin.Context){
