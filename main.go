@@ -17,6 +17,7 @@ func main() {
 	router.GET("/events", func(c *gin.Context) {
 		events = append(events[:1], events[2:]...)
 		fmt.Println(events)
+
 		c.Status(200)
 	})
 
