@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Announce Git Events</title>
+</head>
+<body>
+<audio id="limp">
+    <source src="/intro.ogg" type="audio/ogg"/>
+</audio>
+    <script>
+        var audio = document.getElementById("limp");
+        audio.volume = 0.5;
+        setInterval(function(){
+            GET("http://localhost:8005/events", function(data){
+                console.log(data);
+                if(data.length <= 0 ) return;
+                switch(data[0])
+                {
+                    case "push":
+                        audio.play();
+                        setTimeout(function(){
+                            var utterance = new SpeechSynthesisUtterance('REPOSITORY PUSH');
+                            window.speechSynthesis.speak(utterance);
+                        }, 2200);
+                        break;
+                }
+            });
+        }, 5000);
+
+        function GET(url, cb) {
+            var req = new XMLHttpRequest();
+            req.open("GET", url, true);
+            req.onreadystatechange = function() {
+                if(req.readyState == XMLHttpRequest.DONE && req.status == 200) {
+                    if(cb) cb(req.responseText);
+                }
+            }
+            req.send();
+        }
+    </script>
+</body>
+</html>
