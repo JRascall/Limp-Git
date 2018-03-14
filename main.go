@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/static"
-	"fmt"
 )
 
 var events []string
@@ -16,15 +15,12 @@ func main() {
 
 	router.GET("/events", func(c *gin.Context) {
 		events = append(events[:1], events[2:]...)
-		fmt.Println(events)
-
-		c.Status(200)
+		c.JSON(200, events)
 	})
 
 	router.POST("/hook", func(c *gin.Context){
 		eventType := c.GetHeader("X-GitHub-Event")
 		events = append(events, eventType)
-		fmt.Println(events)
 		c.Status(200)
 	})
 
