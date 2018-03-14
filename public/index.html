@@ -20,10 +20,9 @@
                     case "push":
                         audio.play();
                         setTimeout(function(){
-                            console.log("SPEAK BITCH");
-                            var utterance = new SpeechSynthesisUtterance('REPO PUSHED TO PUSH');
+                            var utterance = new SpeechSynthesisUtterance('REPO PUSHED TO');
                             window.speechSynthesis.speak(utterance);
-                        }, 1500);
+                        }, 1750);
                         break;
                     default:
                         console.log(data[0]);
